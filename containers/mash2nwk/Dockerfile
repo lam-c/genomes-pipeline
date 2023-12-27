@@ -5,7 +5,8 @@ LABEL software.version="1.0.0"
 LABEL description="Generate Mash distance tree of conspecific genomes"
 LABEL website="https://github.com/EBI-Metagenomics/genomes-pipeline"
 LABEL license="GPLv3"
-
+# Line added, to make sure ps is available
+RUN apt-get update && apt install -y procps g++ && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN install2.r \
         reshape2 \
         fastcluster \
