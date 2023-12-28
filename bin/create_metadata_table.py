@@ -90,7 +90,8 @@ def add_sample_project_loc(df, original_accessions, geofile):
     for col_name in ["Sample_accession", "Study_accession", "Country", "Continent"]:
         metadata.setdefault(col_name, dict())
     for new_acc, original_acc in original_accessions.items():
-        sample, project, loc = get_metadata(original_acc)
+        sample = project = loc = "N/A"
+        # sample, project, loc = get_metadata(original_acc)
         metadata["Sample_accession"][new_acc] = sample
         metadata["Study_accession"][new_acc] = project
         metadata["Country"][new_acc] = loc
