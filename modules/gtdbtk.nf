@@ -1,7 +1,6 @@
 process GTDBTK {
 
     container 'quay.io/microbiome-informatics/genomes-pipeline.gtdb-tk:v2.3.0'
-    containerOptions "--bind ${gtdbtk_refdata}:/opt/gtdbtk_refdata"
 
     publishDir(
         path: "${params.outdir}/",
@@ -22,7 +21,7 @@ process GTDBTK {
 
     input:
     path genomes_fna, stageAs: "genomes_dir/*"
-    path gtdbtk_refdata
+    path gtdbtk_refdata, stageAs: "database"
 
     output:
     path 'gtdbtk_results/classify/gtdbtk.bac120.summary.tsv', optional: true, emit: gtdbtk_summary_bac120
@@ -35,7 +34,7 @@ process GTDBTK {
     script:
     // TODO: tweak the cpus based on the number of genomes
     """
-    GTDBTK_DATA_PATH=/opt/gtdbtk_refdata \
+    GTDBTK_DATA_PATH=\$PWD/database \
     gtdbtk classify_wf \
     --cpus ${task.cpus} \
     --pplacer_cpus ${task.cpus} \

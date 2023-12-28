@@ -16,6 +16,7 @@ process AMRFINDER_PLUS {
     )
 
     container 'quay.io/biocontainers/ncbi-amrfinderplus:3.11.4--h6e70893_0'
+    containerOptions = "-v ${params.amrfinder_plus_db}:${params.amrfinder_plus_db}"
 
     input:
     tuple val(cluster), path(fna), path(faa), path(gff)
