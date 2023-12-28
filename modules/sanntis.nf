@@ -33,6 +33,7 @@ process SANNTIS {
         sanntis \
         --ip-file interproscan.tsv \
         --outfile ${cluster_name}_sanntis.gff \
+        --cpu ${task.cpus} \
         ${prokka_gbk}
         """
     } else {
@@ -40,6 +41,7 @@ process SANNTIS {
         sanntis \
         --ip-file ${interproscan_tsv} \
         --outfile ${cluster_name}_sanntis.gff \
+        --cpu ${task.cpus} \
         ${prokka_gbk}
         """
     }
